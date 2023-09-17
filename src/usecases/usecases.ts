@@ -47,6 +47,7 @@ export async function createCleanUsecase(uri: vscode.Uri) {
 
   const folderNameFile = folderName.toLowerCase();
   const name = folderName.charAt(0).toUpperCase() + folderName.slice(1, folderName.length).replace(/_/g, '');
+  const nameUsecase = folderName.charAt(0).toLowerCase() + folderName.slice(1, folderName.length).replace(/_/g, '');
   const entityName = entity.charAt(0).toUpperCase() + entity.slice(1, entity.length);
   const repositoryName = repository?.charAt(0).toUpperCase() + repository!.slice(1, repository?.length).replace(/_/g, '');
   const repositoryfile = repository?.toLowerCase();
@@ -70,7 +71,7 @@ export async function createCleanUsecase(uri: vscode.Uri) {
     ${name}({required this.repository});
   
     Future<${entityName}> call(${paramsName} params) async {
-      return repository.${entityNameRepository}();
+      return repository.${nameUsecase}();
     }
     ${params}
   }`;
@@ -95,7 +96,7 @@ export async function createCleanUsecase(uri: vscode.Uri) {
   const filePathDomain = repositoriesDomainPath + `/${repositoryfile}_repository.dart`;
   let fileContentDomain = fs.readFileSync(filePathDomain, 'utf-8');
 
-  const newContentDomain = `Future<${entityName}> ${entityNameRepository}();\n`;
+  const newContentDomain = `Future<${entityName}> ${nameUsecase}();\n`;
 
     // Encontre a posição do último }
     const lastIndexDomain = fileContentDomain.lastIndexOf('}');
@@ -116,7 +117,7 @@ export async function createCleanUsecase(uri: vscode.Uri) {
   let fileContentData = fs.readFileSync(filePathData, 'utf-8');
   const entityNameRepositoryImpl = entity.charAt(0).toLowerCase() + entity.slice(1, entity.length);
 
-  const newContentData = `Future<${entityName}> ${entityNameRepositoryImpl}();\n`;
+  const newContentData = `Future<${entityName}> ${nameUsecase}();\n`;
 
     // Encontre a posição do último }
     const lastIndexData = fileContentData.lastIndexOf('}');
@@ -141,7 +142,7 @@ export async function createCleanUsecase(uri: vscode.Uri) {
     const filePathDatasource = datasourcePath + `/${repositoryfile}_datasource.dart`;
     let fileContentDatasource = fs.readFileSync(filePathDatasource, 'utf-8');
     
-    const newContentDatasource = `Future<${entityName}> ${entityNameDatasource}();\n`;
+    const newContentDatasource = `Future<${entityName}> ${nameUsecase}();\n`;
 
     // Encontre a posição do último }
     const lastIndexDatasource = fileContentDatasource.lastIndexOf('}');
@@ -161,7 +162,7 @@ export async function createCleanUsecase(uri: vscode.Uri) {
     const filePathDatasourceImpl = datasourcePath + `/${repositoryfile}_datasource_impl.dart`;
     let fileContentDatasourceImpl = fs.readFileSync(filePathDatasourceImpl, 'utf-8');
     
-    const newContentDatasourceImpl = `@override\nFuture<${entityName}> ${entityNameDatasource}() async {\n}`;
+    const newContentDatasourceImpl = `@override\nFuture<${entityName}> ${nameUsecase}() async {\n}`;
 
     // Encontre a posição do último }
     const lastIndexDatasourceImpl = fileContentDatasourceImpl.lastIndexOf('}');

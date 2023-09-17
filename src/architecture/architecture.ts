@@ -53,10 +53,10 @@ export async function createCleanStructure(uri: vscode.Uri) {
     //DATA
     fs.writeFileSync(path.join(repositoriesDataPath, `${folderNameClean}_repository_impl.dart`), `import 'package:${repositoriesDomainPath}/${folderNameClean}_repository.dart';\n\nclass ${name}RepositoryImpl extends ${name}Repository {\nfinal ${name}Datasource datasource;\n\n${name}RepositoryImpl({required this.datasource});\n}`);
     fs.writeFileSync(path.join(datasourcePath, `${folderNameClean}_datasource.dart`), `abstract class ${name}Datasource {\n}`);
-    fs.writeFileSync(path.join(datasourcePath, `${folderNameClean}_datasource_impl.dart`), `import 'package:${datasourcePath}/${folderNameClean}_datasource.dart}';\n\nclass ${name}DataSourceImpl implements ${name}Datasource {\n}`);
+    fs.writeFileSync(path.join(datasourcePath, `${folderNameClean}_datasource_impl.dart`), `import 'package:${datasourcePath}/${folderNameClean}_datasource.dart}';\n\nclass ${name}DatasourceImpl implements ${name}Datasource {\n}`);
   
     //DOMAIN
-    fs.writeFileSync(path.join(repositoriesDomainPath, `${folderNameClean}_repository.dart`), 'abstract class EventRepository {\n}');
+    fs.writeFileSync(path.join(repositoriesDomainPath, `${folderNameClean}_repository.dart`), `abstract class ${name}Repository {\n}`);
   
   
   
