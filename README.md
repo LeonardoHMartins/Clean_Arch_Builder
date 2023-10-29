@@ -1,6 +1,4 @@
-# clean-arch-builder README
-
-This is the README for your extension "clean-arch-builder".
+# clean-arch-builder
 
 ## Features
 

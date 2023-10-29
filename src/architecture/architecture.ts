@@ -37,16 +37,22 @@ export async function createCleanStructure(uri: vscode.Uri) {
     /* -------------------------------------------------------------------------- */
     /*              Crie as pastas e subpastas personalizadas DOMAIN              */
     /* -------------------------------------------------------------------------- */
+    // console.log(uri.path);
+    // console.log(uri.fsPath);
+    
     const domainPath = path.join(folderPath, 'domain');
     const entitiesPath = path.join(domainPath, 'entities');
-    const repositoriesDomainPath = path.join(domainPath, 'repositories');
+    // const repositoriesDomainPath = path.relative('domain', 'repositories');
+    const repositoriesDomainPath = path.resolve(domainPath, 'domain', 'repositories');
+    // const repositoriesDomainPath = path.join(domainPath, 'repositories');
     const usecasePath = path.join(domainPath, 'usecases');
-  
+    
     fs.mkdirSync(domainPath, { recursive: true });
     fs.mkdirSync(entitiesPath);
     fs.mkdirSync(repositoriesDomainPath);
     fs.mkdirSync(usecasePath);
-  
+    
+    console.log(repositoriesDomainPath);
     /* -------------------------------------------------------------------------- */
     /*                     Crie os arquivos dentro das pastas                     */
     /* -------------------------------------------------------------------------- */
